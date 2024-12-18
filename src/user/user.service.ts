@@ -12,6 +12,10 @@ export class UserService {
     return await this.userRepository.create(dto);
   }
 
+  async getByEmail(email: string) {
+    return await this.userRepository.getByEmail(email);
+  }
+
   private async validateUserUnique(dto: CreateUserDto) {
     const { email, document } = dto;
 
