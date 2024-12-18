@@ -18,12 +18,31 @@ enum RoleTypes {
   MERCHANT
 }
 
+enum TransactionStatus {
+  PENDING
+  COMPLETE
+  CANCELED
+}
+
 model User {
-  id        Int       @id @default(autoincrement())
-  name      String
-  email     String    @unique
-  document  String    @unique
-  password  String
-  role      RoleTypes @default(COMMOM)
-  createdAt DateTime  @default(now())
+  id                   Int           @id @default(autoincrement())
+  name                 String
+  email                String        @unique
+  document             String        @unique
+  password             String
+  role                 RoleTypes     @default(COMMOM)
+  balance              Float
+  createdAt            DateTime      @default(now())
+  sentTransactions     Transaction[] @relation("SentTransactions")
+  receivedTransactions Transaction[] @relation("ReceivedTransactions")
+}
+
+model Transaction {
+  id         Int               @id @default(autoincrement())
+  amount     Float
+  senderId   Int
+  sender     User              @relation("SentTransactions", fields: [senderId], references: [id])
+  receiverId Int
+  receiver   User              @relation("ReceivedTransactions", fields: [receiverId], references: [id])
+  createdAt  DateTime          @default(now())
 }
