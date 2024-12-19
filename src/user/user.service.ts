@@ -1,15 +1,22 @@
 import { BadRequestException, Injectable } from '@nestjs/common';
 import { UserRepository } from 'src/infra/repository/user.repository';
 import { CreateUserDto } from './dto/create-user.dto';
+import { Helper } from 'src/utils/helper';
 
 @Injectable()
 export class UserService {
-  constructor(private readonly userRepository: UserRepository) {}
+  constructor(
+    private readonly userRepository: UserRepository,
+    private readonly helper: Helper,
+  ) {}
 
   async create(dto: CreateUserDto) {
     await this.validateUserUnique(dto);
 
-    return await this.userRepository.create(dto);
+    return await this.userRepository.create({
+      ...dto,
+      password: this.helper.generateHash(dto.password),
+    });
   }
 
   async getByEmail(email: string) {

@@ -3,6 +3,7 @@ import { JwtService } from '@nestjs/jwt';
 import { UserService } from 'src/user/user.service';
 import { LoginRequestDto } from './dto/login-request.dto';
 import { CreateUserDto } from 'src/user/dto/create-user.dto';
+import { Helper } from 'src/utils/helper';
 
 @Injectable()
 export class AuthService {
@@ -12,6 +13,7 @@ export class AuthService {
   constructor(
     private readonly userService: UserService,
     private readonly jwtService: JwtService,
+    private readonly helper: Helper,
   ) {}
 
   async login(dto: LoginRequestDto) {
@@ -21,7 +23,7 @@ export class AuthService {
       throw new UnauthorizedException('Email or password incorrect');
     }
 
-    if (dto.password !== user.password) {
+    if (!this.helper.compareHash(dto.password, user.password)) {
       throw new UnauthorizedException('Email or password incorrect');
     }
 
