@@ -4,12 +4,10 @@ import { UserService } from 'src/user/user.service';
 import { LoginRequestDto } from './dto/login-request.dto';
 import { CreateUserDto } from 'src/user/dto/create-user.dto';
 import { Helper } from 'src/utils/helper';
+import { jwtConstants } from 'src/config/constants';
 
 @Injectable()
 export class AuthService {
-  secret = process.env.JWT_SECRET;
-  expiresIn = process.env.JWT_EXPIRES_IN;
-
   constructor(
     private readonly userService: UserService,
     private readonly jwtService: JwtService,
@@ -33,7 +31,7 @@ export class AuthService {
         id: user.id,
         email: user.email,
       },
-      { expiresIn: this.expiresIn, secret: this.secret },
+      { expiresIn: jwtConstants.expiresIn, secret: jwtConstants.secret },
     );
 
     return {
@@ -55,7 +53,7 @@ export class AuthService {
         id: user.id,
         email: user.email,
       },
-      { expiresIn: this.expiresIn, secret: this.secret },
+      { expiresIn: jwtConstants.expiresIn, secret: jwtConstants.secret },
     );
 
     return {
