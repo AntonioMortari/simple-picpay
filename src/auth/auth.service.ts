@@ -6,7 +6,7 @@ import { CreateUserDto } from 'src/user/dto/create-user.dto';
 
 @Injectable()
 export class AuthService {
-  secret = process.env.SECRET;
+  secret = process.env.JWT_SECRET;
   expiresIn = process.env.JWT_EXPIRES_IN;
 
   constructor(
@@ -31,7 +31,7 @@ export class AuthService {
         id: user.id,
         email: user.email,
       },
-      { expiresIn: this.expiresIn },
+      { expiresIn: this.expiresIn, secret: this.secret },
     );
 
     return {
@@ -53,7 +53,7 @@ export class AuthService {
         id: user.id,
         email: user.email,
       },
-      { expiresIn: this.expiresIn },
+      { expiresIn: this.expiresIn, secret: this.secret },
     );
 
     return {
