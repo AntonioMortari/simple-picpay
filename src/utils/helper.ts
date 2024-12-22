@@ -4,12 +4,15 @@ import * as bcrypt from 'bcrypt';
 @Injectable()
 export class Helper {
   generateHash(password: string): string {
-    const genSalt = bcrypt.genSaltSync(10);
-    return bcrypt.hashSync(password, genSalt);
+    const salt = bcrypt.genSaltSync();
+    if (!password || !salt) {
+      throw new Error('Password and salt are required');
+    }
+    return bcrypt.hashSync(password, salt);
   }
 
   compareHash(string: string, hash: string): boolean {
-    const result = bcrypt.compareSync(string, hash);
-    return result;
+    return bcrypt.compareSync(string, hash);
   }
 }
+
