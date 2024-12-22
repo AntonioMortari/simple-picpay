@@ -27,6 +27,5 @@ export class CreateUserDto {
   role?: RoleTypes;
 
   @IsNumber()
-  @IsOptional()
   balance: number;
 }
