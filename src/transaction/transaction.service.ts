@@ -43,6 +43,8 @@ export class TransactionService {
     await this.userService.update(receiverId, {
       balance: receiver.balance + amount,
     });
+
+    await this.tranactionRepository.create(dto);
   }
 
   private async validateTransaction() {
