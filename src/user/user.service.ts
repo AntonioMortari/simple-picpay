@@ -2,6 +2,7 @@ import { BadRequestException, Injectable } from '@nestjs/common';
 import { UserRepository } from 'src/infra/repository/user.repository';
 import { CreateUserDto } from './dto/create-user.dto';
 import { Helper } from 'src/utils/helper';
+import { Prisma } from '@prisma/client';
 
 @Injectable()
 export class UserService {
@@ -19,8 +20,16 @@ export class UserService {
     });
   }
 
+  async update(id: number, dto: Prisma.UserUpdateInput) {
+    await this.userRepository.update(id, dto);
+  }
+
   async getByEmail(email: string) {
     return await this.userRepository.getByEmail(email);
+  }
+
+  async getById(id: number) {
+    return await this.userRepository.getById(id);
   }
 
   private async validateUserUnique(dto: CreateUserDto) {
