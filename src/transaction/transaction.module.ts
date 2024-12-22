@@ -4,6 +4,8 @@ import { TransactionRepository } from 'src/infra/repository/transaction.reposito
 import { UserService } from 'src/user/user.service';
 import { UserRepository } from 'src/infra/repository/user.repository';
 import { Helper } from 'src/utils/helper';
+import { TransactionController } from './transaction.controller';
+import { JwtService } from '@nestjs/jwt';
 
 @Module({
   providers: [
@@ -12,6 +14,8 @@ import { Helper } from 'src/utils/helper';
     UserService,
     UserRepository,
     Helper,
+    JwtService,
   ],
+  controllers: [TransactionController],
 })
 export class TransactionModule {}
