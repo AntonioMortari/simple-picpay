@@ -10,12 +10,15 @@ import { CreateTransactionDto } from './dto/create-transaction.dto';
 import { TransactionRepository } from 'src/infra/repository/transaction.repository';
 import { UserService } from 'src/user/user.service';
 import { User } from '@prisma/client';
+import { MessagingService } from 'src/services/messaging/messaging.service';
+import { templateEmails } from 'src/templates/email';
 
 @Injectable()
 export class TransactionService {
   constructor(
     private readonly tranactionRepository: TransactionRepository,
     private readonly userService: UserService,
+    private readonly messagingService: MessagingService,
   ) {}
 
   async create(dto: CreateTransactionDto) {
@@ -44,7 +47,15 @@ export class TransactionService {
       balance: receiver.balance + amount,
     });
 
-    await this.tranactionRepository.create(dto);
+    const transaction = await this.tranactionRepository.create(dto);
+
+    await this.messagingService.sendMessage({
+      html: templateEmails.transferSuccessfully(sender, receiver, amount),
+      subject: 'Transferência realizada com sucesso!',
+      to: receiver.email,
+    });
+
+    return transaction;
   }
 
   private async validateTransaction() {

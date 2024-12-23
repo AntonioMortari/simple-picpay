@@ -6,6 +6,7 @@ import { UserRepository } from 'src/infra/repository/user.repository';
 import { Helper } from 'src/utils/helper';
 import { TransactionController } from './transaction.controller';
 import { JwtService } from '@nestjs/jwt';
+import { MessagingService } from 'src/services/messaging/messaging.service';
 
 @Module({
   providers: [
@@ -15,6 +16,7 @@ import { JwtService } from '@nestjs/jwt';
     UserRepository,
     Helper,
     JwtService,
+    MessagingService,
   ],
   controllers: [TransactionController],
 })
