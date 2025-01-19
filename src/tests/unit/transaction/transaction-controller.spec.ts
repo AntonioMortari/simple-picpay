@@ -1,7 +1,7 @@
 import { Test, TestingModule } from '@nestjs/testing';
-import { TransactionController } from './transaction.controller';
-import { TransactionService } from './transaction.service';
-import { CreateTransactionDto } from './dto/create-transaction.dto';
+import { TransactionController } from '../../../transaction/transaction.controller';
+import { TransactionService } from '../../../transaction/transaction.service';
+import { CreateTransactionDto } from '../../../transaction/dto/create-transaction.dto';
 import { Transaction } from '@prisma/client';
 import { JwtService } from '@nestjs/jwt';
 

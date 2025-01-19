@@ -1,7 +1,7 @@
 import { Test, TestingModule } from '@nestjs/testing';
-import { AuthController } from './auth.controller';
-import { AuthService } from './auth.service';
-import { LoginRequestDto } from './dto/login-request.dto';
+import { AuthController } from '../../../auth/auth.controller';
+import { AuthService } from '../../../auth/auth.service';
+import { LoginRequestDto } from '../../../auth/dto/login-request.dto';
 import { CreateUserDto } from 'src/user/dto/create-user.dto';
 import { RoleTypes } from '@prisma/client';
 

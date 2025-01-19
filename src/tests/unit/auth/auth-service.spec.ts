@@ -1,9 +1,9 @@
 import { Test, TestingModule } from '@nestjs/testing';
-import { AuthService } from './auth.service';
+import { AuthService } from '../../../auth/auth.service';
 import { UserService } from 'src/user/user.service';
 import { Helper } from 'src/utils/helper';
 import { JwtService } from '@nestjs/jwt';
-import { LoginRequestDto } from './dto/login-request.dto';
+import { LoginRequestDto } from '../../../auth/dto/login-request.dto';
 import { RoleTypes, User } from '@prisma/client';
 import { UnauthorizedException } from '@nestjs/common';
 import { jwtConstants } from 'src/config/constants';

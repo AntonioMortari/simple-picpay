@@ -1,9 +1,9 @@
 import { Test, TestingModule } from '@nestjs/testing';
-import { TransactionService } from './transaction.service';
+import { TransactionService } from '../../../transaction/transaction.service';
 import { TransactionRepository } from 'src/infra/repository/transaction.repository';
 import { UserService } from 'src/user/user.service';
 import { MessagingService } from 'src/services/messaging/messaging.service';
-import { CreateTransactionDto } from './dto/create-transaction.dto';
+import { CreateTransactionDto } from '../../../transaction/dto/create-transaction.dto';
 import {
   NotFoundException,
   BadRequestException,

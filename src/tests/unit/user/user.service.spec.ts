@@ -1,8 +1,8 @@
 import { Test, TestingModule } from '@nestjs/testing';
-import { UserService } from './user.service';
+import { UserService } from '../../../user/user.service';
 import { UserRepository } from 'src/infra/repository/user.repository';
 import { Helper } from 'src/utils/helper';
-import { CreateUserDto } from './dto/create-user.dto';
+import { CreateUserDto } from '../../../user/dto/create-user.dto';
 import { Prisma, RoleTypes, User } from '@prisma/client';
 
 import { ConflictException } from '@nestjs/common';
